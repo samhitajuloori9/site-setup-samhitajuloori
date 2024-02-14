@@ -1,0 +1,28 @@
+client
+dev tun
+proto udp
+nobind
+remote-cert-tls server
+route-nopull
+
+remote SERVERNAME 1194
+verify-x509-name CANAME name
+auth SHA512
+data-ciphers AES-256-CBC
+auth-nocache
+<ca>
+CACERTIFICATEGOESHERE
+# look at the CA openssl command to see how CA generates the certificate
+</ca>
+<cert>
+SIGNEDCERTOFCLIENT
+# look at the openssl command to you ran to see how to generate a CSR
+# look at the command the CA ran to sign the certificate
+</cert>
+<key>
+PRIVATEKEYOFCLIENT
+</key>
+<tls-crypt>
+TASECRET
+# generate with: openvpn --genkey secret ta.key
+</tls-crypt>
